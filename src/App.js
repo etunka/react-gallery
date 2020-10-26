@@ -8,8 +8,7 @@ import { ThumbnailImage } from './components/ThumbnailImage';
 const imageList = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg"];
 const defaultIndex = 0;
 
-// go to next image
-function getNext(length, currentIndex){
+function goToNext(length, currentIndex){
   let newIndex
   if(currentIndex < length - 1) {
     newIndex = currentIndex + 1
@@ -19,8 +18,7 @@ function getNext(length, currentIndex){
   return newIndex;
 }
 
-// go to previous image
-function getPrevious(length, currentIndex){
+function goToPrevious(length, currentIndex){
   let newIndex
   if(currentIndex <= 0) {
     newIndex = length - 1
@@ -39,8 +37,8 @@ export default function App() {
       <div className="full-img">
         <DisplayedImage src={`images/${imageList[displayedIndex]}`}/>
         <div className="overlay hidden"></div>
-        <Button buttonClass={"nav-btn nav-btn--left"} onClick = {() => setImageIndex(getPrevious(imageList.length, displayedIndex))}><img src="./left-chevron.png" alt="left"/></Button>
-        <Button buttonClass={"nav-btn nav-btn--right"} onClick = {() => setImageIndex(getNext(imageList.length, displayedIndex))}><img src="./right-chevron.png" alt="right"/></Button>
+        <Button buttonClass={"nav-btn nav-btn--left"} onClick = {() => setImageIndex(goToPrevious(imageList.length, displayedIndex))}><img src="./left-chevron.png" alt="left"/></Button>
+        <Button buttonClass={"nav-btn nav-btn--right"} onClick = {() => setImageIndex(goToNext(imageList.length, displayedIndex))}><img src="./right-chevron.png" alt="right"/></Button>
       </div>
       <div className="thumb-bar">
         {imageList.map((image, index) => <ThumbnailImage src={`./images/${image}`} key={index} onClick = {() => setImageIndex(index)}  /> )}
